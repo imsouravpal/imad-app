@@ -86,7 +86,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:articelName', function(req, res) {
-  res.send(creatTemplate(articels[articelName]));
+    var articelName = req.parans.articels;
+    res.send(creatTemplate(articels[articelName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
