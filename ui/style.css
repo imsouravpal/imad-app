@@ -20,10 +20,10 @@ body {
     height: 200px;
 }
 
-  .container {
-                max-width: 800px;
-                margin: 0 auto;
-                color: blue;
-                font-family: sans-serif;
-                padding-top: 30px;
-            }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    color: blue;
+    font-family: sans-serif;
+    padding-top: 30px;
+    }
