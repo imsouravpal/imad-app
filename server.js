@@ -86,6 +86,14 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+//Adding Counter. So if they go inside the path the counter will increment by 1 every time.
+var counter = 0;
+app.get('/counter', function (req, res) {
+    counter = counter+1;
+    res.send(counter.toString());
+});
+//Counter added.
+
 app.get('/:articelName', function(req, res) {
     var articelName = req.params.articelName;
     res.send(creatTemplate(articels[articelName]));
