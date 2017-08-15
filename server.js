@@ -43,6 +43,7 @@ var articels = {
                 </p>`
     },
 };
+
 function creatTemplate(data){
     var title = data.title;
     var date = data.date;
