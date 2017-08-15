@@ -5,19 +5,44 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articelOne = {
-    title: "Atricle One",
-    heading: "Articel One",
-    date: "15 Aug 2017",
-    content:`
+var articels = {
+    'articelOne': {
+        title: "Atricle One",
+        heading: "Articel One",
+        date: "15 Aug 2017",
+        content:`
                 <p>
                     This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
                 </p>
                 <p>
                     This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
                 </p>`
+    },
+    'articeltwo': {
+        title: "Atricle Two",
+        heading: "Articel Two",
+        date: "15 Aug 2017",
+        content:`
+                <p>
+                    This is my 2nd Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
+                </p>
+                <p>
+                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
+                </p>`
+    },
+    'articelthree': {
+        title: "Atricle Three",
+        heading: "Articel Three",
+        date: "15 Aug 2017",
+        content:`
+                <p>
+                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
+                </p>
+                <p>
+                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
+                </p>`
+    },
 };
-
 function creatTemplate(data){
     var title = data.title;
     var date = data.date;
@@ -60,16 +85,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/articel-one', function(req, res) {
-  res.send(creatTemplate(articelOne));
-});
-
-app.get('/articel-two', function(req, res) {
-  res.send('This is Url2');
-});
-
-app.get('/articel-three', function(req, res) {
-  res.send('This is Url3');
+app.get('/:articelName', function(req, res) {
+  res.send(creatTemplate(articels[articelName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
