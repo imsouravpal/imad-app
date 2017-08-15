@@ -87,10 +87,14 @@ app.get('/', function (req, res) {
 
 app.get('/:articelName', function(req, res) {
     var articelName = req.params.articelName;
-    res.send(creatTemplate(articels[    articelName]));
+    res.send(creatTemplate(articels[articelName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+});
+
+app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
