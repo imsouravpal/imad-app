@@ -6,7 +6,7 @@ element.innerHTML = "New value";
 
 //Change2: Move the image on click
 var element = document.getElementById('madi');
-img.onclick = function() {
+madi.onclick = function() {
     img.style.marginleft = '100px';
 };
 
