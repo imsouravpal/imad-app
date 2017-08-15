@@ -10,15 +10,15 @@ app.get('/', function (req, res) {
 });
 
 app.get('/articel-one', function(req, res) {
-  res.sendFile('This is Url1');
+  res.send('This is Url1');
 });
 
 app.get('/articel-two', function(req, res) {
-  res.sendFile('This is Url2');
+  res.send('This is Url2');
 });
 
 app.get('/articel-three', function(req, res) {
-  res.sendFile('This is Url3');
+  res.send('This is Url3');
 });
 
 app.get('/ui/style.css', function (req, res) {
