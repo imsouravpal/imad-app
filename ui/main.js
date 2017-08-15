@@ -5,8 +5,8 @@ var element = document.getElementById('main-text');
 element.innerHTML = "New value";
 
 //Change2: Move the image on click
-var element = document.getElementById('madi');
-madi.onclick = function() {
+var img = document.getElementById('madi');
+img.onclick = function() {
     img.style.marginleft = '100px';
 };
 
