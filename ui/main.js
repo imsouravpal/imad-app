@@ -16,15 +16,15 @@ console.log('Loaded!');
 
 //Change3: Move image gradualy by using intervalTime
 
-var img = document.getElementById('madi');
-    marginLeft = 0;
-    function moveRight(){
-        marginLeft = marginLeft + 10;
-        img.style.marginLeft = marginLeft + 'px';
-    }
-    img.onclick = function() {
-        var interval = setInterval(moveRight, 100);
-};  
+//var img = document.getElementById('madi');
+//    marginLeft = 0;
+//    function moveRight(){
+//        marginLeft = marginLeft + 10;
+//        img.style.marginLeft = marginLeft + 'px';
+//    }
+//    img.onclick = function() {
+//        var interval = setInterval(moveRight, 100);
+//};  
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ button.onclick = function() {
           //Take Some action if it is successful.
             if (request.status === 200)   {           //First check if this is an Successful request or not!!
               var counter = request.responseText;    //Extract the value from that request. Take the req and put it in the counter variabl.
-             var span = document.getElementById('count');
-             span.innerHTML = counter.toString();   //Take the counter variable and put it into the spam.
+              var span = document.getElementById('count');
+              span.innerHTML = counter.toString();   //Take the counter variable and put it into the spam.
             } //This is all we do Once we receve the response from the request. 
           
         }   
