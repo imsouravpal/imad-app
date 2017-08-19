@@ -37,12 +37,11 @@ var button = document.getElementById('counter');
 button.onclick = function() {   
     
     //Creat a requestObject: to the counter endpoint
-       var request = new XMLHttpRequest();     //Creat a request by using something called XMLHttp request.
+       var request = new XMLHttpRequest();     //Creat a request by using XMLHttp request.
       
     
-    //Request are many type.Open,Sent,loading,successfully loded:Stages of Request
+    //Request are many types. Open,Sent,loading,successfully loded:Stages of Request
     //Capture the response and save it in a variable. For that, we have to do detect the change in state.
-    
     request.onreadystatechange = function() {
       if (request.readyState === XMLHttpRequest.Done) {     //Check the current state of Request object.
           
