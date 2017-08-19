@@ -37,7 +37,7 @@ var button = document.getElementById('counter');
 button.onclick = function() {   
     
     //Creat a requestObject: to the counter endpoint
-       var request = new XMLHttpRequest();     //Creat a request by using XMLHttp request.
+    var request = new XMLHttpRequest();     //Creat a request by using XMLHttp request.
       
     
     //Request are many types. Open,Sent,loading,successfully loded:Stages of Request
