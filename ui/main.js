@@ -73,12 +73,43 @@ button.onclick = function() {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 //Submit Name.
-var nameInput = document.getElementById('name');
-var name = nameInput.value;
-var submit = document.getElementById('submit_btn');
+var nameInput = document.getElementById('name');  //Select InputBox
+var name = nameInput.value;  //Extrect the value from input box
+var submit = document.getElementById('submit_btn');  //When ever the submit-btn is clicked
 submit.onclick = function() {
-  //Make a request to the server and send the name
-  
+  //Creat a Request Object
+  var request = new XMLHttpRequest();     //Creat a request by using XMLHttp request.
+      
+    
+    //Request are many types. Open,Sent,loading,successfully loded:Stages of Request
+    //Capture the response and save it in a variable. For that, we have to do:- detect the change in state.
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.Done) {     //Check the current state of Request object.
+          
+          //Take Some action if it is successful.
+            if (request.status === 200)   {           
+                //Capture the list of name and render it as a list.
+                //var names = ['name1', 'name2', 'name3']; //IF REQ SUCCESSFUL get the req of names.
+                //Insted of hardcoding the list of names. Get that from response
+                var names = request.responseText; //Is a string not a js array. 
+                names = JSON.parse(names);  //Converted from string back into a Object. Here its an array.
+                //Convert this into Html-String
+                var list = '';
+                for (var i=0; i<names.length; i++) {
+                    list += '<li>' + names[i] + '</li>';
+        }
+                var ul = document.getElementById('namelist');  //Render the list of names.
+                ul.innerHTML = list;
+            } //This is all we do Once we receve the response from the request. 
+          
+        }   
+      
+            //If not, then not Not Done Yet.
+    };
+      
+    //Make the request: 
+    request.open('GET', 'http://spsourav263.imad.hasura-app.io/submit-name?name=' + name, true); //Send the req to this URL.
+    request.send(null);
   //Capture the list of name and render it as a list.
     var names = ['name1', 'name2', 'name3'];
        //Convert this into Html-String
