@@ -94,9 +94,9 @@ submit.onclick = function() {
                 names = JSON.parse(names);  //Converted from string back into a Object. Here its an array.
                 //Convert this into Html-String
                 var list = '';
-                for (var i=0; i<names.length; i++) {
+                for (var i=0; i< names.length; i++) {
                     list += '<li>' + names[i] + '</li>';
-        }
+                }
                 var ul = document.getElementById('namelist');  //Render the list of names.
                 ul.innerHTML = list;
             } //This is all we do Once we receve the response from the request. 
