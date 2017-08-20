@@ -112,11 +112,12 @@ submit.onclick = function() {
     request.send(null);
   //Capture the list of name and render it as a list.
     var names = ['name1', 'name2', 'name3'];
+       //We use this part of code inside when req is successfull. in submit.onclick function. 
        //Convert this into Html-String
-    var list = '';
-    for (var i=0; i<names.length; i++) {
-        list += '<li>' + names[i] + '</li>';
-  }
-    var ul = document.getElementById('namelist');
-    ul.innerHTML = list;
+    //var list = '';
+    //for (var i=0; i<names.length; i++) {
+        //list += '<li>' + names[i] + '</li>';
+  //}
+    //var ul = document.getElementById('namelist');
+    //ul.innerHTML = list;
 };
