@@ -112,7 +112,7 @@ submit.onclick = function() {
     request.open('GET', 'http://spsourav263.imad.hasura-app.io/submit-name?name=' + name, true); //Send the req to this URL.
     request.send(null);
   //Capture the list of name and render it as a list.
-    var names = ['name1', 'name2', 'name3'];
+    //var names = ['name1', 'name2', 'name3'];
        //We use this part of code inside when req is successfull. in submit.onclick function. 
        //Convert this into Html-String
     //var list = '';
