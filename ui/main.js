@@ -41,7 +41,7 @@ button.onclick = function() {
       
     
     //Request are many types. Open,Sent,loading,successfully loded:Stages of Request
-    //Capture the response and save it in a variable. For that, we have to do detect the change in state.
+    //Capture the response and save it in a variable. For that, we have to do:- detect the change in state.
     request.onreadystatechange = function() {
       if (request.readyState === XMLHttpRequest.Done) {     //Check the current state of Request object.
           
