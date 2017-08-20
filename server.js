@@ -97,7 +97,7 @@ app.get('/counter', function (req, res) {
 //Counter added.
 
 
-
+//------------------------------------------------------------------------
 
 //Another way of sending data. We add an URLEnd point which takes a name and returns a list of names.
 //Query Parameter
@@ -106,8 +106,8 @@ app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx Thi
     var name = req.query.name; //This how to extrect data from Query-parameter string.
     
 });
-
-
+//Making a request to server endpoint by Query parameter string foram is ended here.
+//-------------------------------------------------------------------------
 
 
 app.get('/:articelName', function(req, res) {
@@ -132,21 +132,28 @@ app.get('/ui/madi.png', function (req, res) {
 
 
 
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+//Because we added Query Parameter string in upper part of this server so we commented out this old server req part. 
 
 //Make a request to the server.
 //1st server should listning to the request.
 //Below function is One way of getting the information as a part of URL ans sending the information back as JSON.
-var names = [];  //Initializing names array.
-app.get('/submit-name/:name', function(req, res){   //:name This parameter called the variable 'name'.
+
+//var names = [];  //Initializing names array.
+//app.get('/submit-name/:name', function(req, res){   //:name This parameter called the variable 'name'.
    //Get the name of request Object
-   var name = req.params.name;  //Extrect the name
+   //var name = req.params.name;  //Extrect the name
    
-   names.push(name);  //Once we extrect the name value, we concatenate it to our overal list of names.
+   //names.push(name);  //Once we extrect the name value, we concatenate it to our overal list of names.
    
    //Converting names array into a string.
    //JSON: Javascript Object Notation. It's a way of converting JS Objects into string.
-   res.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
-});
+   //res.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
+//});
+//Making Request to server code is ended here.
+
+//----------------------------------------------------------------------------------------------------------------------------------------
 
 
 
