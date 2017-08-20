@@ -125,7 +125,7 @@ app.get('/submit-name/:name', function(req, res){   //:name This parameter calle
    
    //Converting names array into a string.
    //JSON: Javascript Object Notation. It's a way of converting JS Objects into string.
-   req.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
+   res.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
 });
 
 //Another way of sending data.
