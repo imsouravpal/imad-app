@@ -73,8 +73,7 @@ button.onclick = function() {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 //Submit Name.
-var nameInput = document.getElementById('name');  //Select InputBox
-var name = nameInput.value;  //Extrect the value from input box
+
 var submit = document.getElementById('submit_btn');  //When ever the submit-btn is clicked
 submit.onclick = function() {
   //Creat a Request Object
@@ -108,6 +107,8 @@ submit.onclick = function() {
     };
       
     //Make the request: 
+    var nameInput = document.getElementById('name');  //Select InputBox
+    var name = nameInput.value;  //Extrect the value from input box
     request.open('GET', 'http://spsourav263.imad.hasura-app.io/submit-name?name=' + name, true); //Send the req to this URL.
     request.send(null);
   //Capture the list of name and render it as a list.
