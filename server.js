@@ -105,6 +105,9 @@ app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx Thi
     //How to extract "name=xxxxxx" this Query-parameter string part from req object.
     var name = req.query.name; //This how to extrect data from Query-parameter string.
     
+    names.push(name);
+    
+    res.send(JSON.stringify(names));
 });
 //Making a request to server endpoint by Query parameter string foram is ended here.
 //-------------------------------------------------------------------------
