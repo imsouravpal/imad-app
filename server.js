@@ -114,7 +114,8 @@ app.get('/ui/madi.png', function (req, res) {
 
 
 //Make a request to the server.
-//1st server should listning to the request
+//1st server should listning to the request.
+//Below function is One way of getting the information as a part of URL ans sending the information back as JSON.
 var names = [];  //Initializing names array.
 app.get('/submit-name/:name', function(req, res){   //:name This parameter called the variable 'name'.
    //Get the name of request Object
@@ -126,6 +127,8 @@ app.get('/submit-name/:name', function(req, res){   //:name This parameter calle
    //JSON: Javascript Object Notation. It's a way of converting JS Objects into string.
    req.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
 });
+
+//Another way of sending data.
 
 
 
