@@ -86,6 +86,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+
+
 // Adding Counter. So if they go inside the path the counter will increment by 1 every time. 
 var counter = 0;
 app.get('/counter', function (req, res) {
@@ -94,14 +96,30 @@ app.get('/counter', function (req, res) {
 });
 //Counter added.
 
+
+
+
+//Another way of sending data.
+//Query Parameter
+app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx This how a Query-Parameter Looklike.
+    //How to extract "name=xxxxxx" this Query-parameter string part from req object.
+    var name = req.query.name; //This how to extrect data from Query-parameter string.
+    
+});
+
+
+
+
 app.get('/:articelName', function(req, res) {
     var articelName = req.params.articelName;
     res.send(creatTemplate(articels[articelName]));
 });
 
+
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
+
 
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
@@ -111,6 +129,8 @@ app.get('/ui/main.js', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
+
+
 
 
 //Make a request to the server.
@@ -128,7 +148,17 @@ app.get('/submit-name/:name', function(req, res){   //:name This parameter calle
    res.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
 });
 
-//Another way of sending data.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
