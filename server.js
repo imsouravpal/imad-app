@@ -113,6 +113,27 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 
+//Make a request to the server.
+//1st server should listning to the request
+var names = [];  //Initializing names array.
+app.get('/submit-name/:name', function(req, res){   //:name This parameter called the variable 'name'.
+   //Get the name of request Object
+   var name = req.params.name;  //Extrect the name
+   
+   names.push(name);  //Once we extrect the name value, we concatenate it to our overal list of names.
+   
+   //Converting names array into a string.
+   //JSON: Javascript Object Notation. It's a way of converting JS Objects into string.
+   req.send(JSON.stringify(names));  // Once it push the name value then return the response on string format.
+});
+
+
+
+
+
+
+
+
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
