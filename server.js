@@ -1,7 +1,16 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool = require('pg').Pool; //Step 1: creating pool for sever connection
 
+var config = {  // Step 2: supplie your database cradentials
+    user: 'spsourav263',
+    database: 'spsourav263',
+    host: 'db.imad.hasura-app.io',
+    port: '5432',
+    password: process.env.DB_PASSWORD  //If we declear our password here it unsafe so we use "ENVIRONMENT VARIABLE"(here DB_PASSWORD).
+                                       //this line means use the ENVIRONMENT VARIABLE called DB_PASSWORD.
+};
 var app = express();
 app.use(morgan('combined'));
 
@@ -84,6 +93,22 @@ function creatTemplate(data){
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
+
+
+
+//Connect to detabase Test.
+var pool = new Pool(config);
+app.get('/test-db', function(req, res){
+   //make a select request
+   //return a response with a results
+   pool.query("SELECT * FROM user", function(err, result){
+      if(err){
+          res.status(500).send(err.toString());
+      } else{
+          res.send(JSON.stringify(result)); 
+      }
+   });  //Makeing A query
 });
 
 
