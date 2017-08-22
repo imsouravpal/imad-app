@@ -79,7 +79,7 @@ function creatTemplate(data){
                       ${heading}
                     </h3>
                     <div>
-                      ${date}
+                      ${date.toDateString}
                     </div>
                     <div>
                       ${content}
@@ -141,7 +141,9 @@ app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx Thi
 app.get('/articels/:articelName', function(req, res) {
     //var articelName = req.params.articelName; //moving this code to pool.query part.
     
-    pool.query("SELECT * FROM article where title = '" + req.param.articleName +"'", function(err, result){
+    //SELECT * FROM article where title = '\'; DELETE WHERE a = \'asdf' //delete the entire coloum
+    //pool.query("SELECT * FROM article where title = '" + req.param.articleName +"'", function(err, result){ //that is not safe
+    pool.query("SELECT * FROM article where title = $1" + [req.param.articleName], function(err, result){
         if(err){
             res.status11(500).send(err.toString());
         } else {
