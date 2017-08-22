@@ -138,13 +138,26 @@ app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx Thi
 //-------------------------------------------------------------------------
 
 
-app.get('/:articelName', function(req, res) {
-    var articelName = req.params.articelName;
-    res.send(creatTemplate(articels[articelName]));
+app.get('/articels/:articelName', function(req, res) {
+    //var articelName = req.params.articelName; //moving this code to pool.query part.
+    
+    pool.query("SELECT * FROM article where title = " + req.param.articleName, function(err, result){
+        if(err){
+            res.status11(500).send(err.toString());
+        } else {
+            if (result.rows.length === 0){
+                res.status(404).send('Article not found');
+            } else {
+                var articleData = result.rows[0];
+                res.send(creatTemplate(articleData));
+            }
+        }
+    });
 });
 
 
 app.get('/ui/style.css', function (req, res) {
+    
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
