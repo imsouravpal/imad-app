@@ -138,6 +138,7 @@ app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx Thi
 //-------------------------------------------------------------------------
 
 
+//Making articles data dynamic: 
 app.get('/articels/:articelName', function(req, res) {
     //var articelName = req.params.articelName; //moving this code to pool.query part.
     
