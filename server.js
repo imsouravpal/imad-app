@@ -111,7 +111,7 @@ function hash(input, salt){
 //Endpiont connection function.
 app.get('/hash/:input', function(req, res){ //Takes an input from the user as a part of URL amd returns a hash string.
     var hashedString = hash(req.params.input, 'instead-of-salt-for-now-we-create-a-random-string-as-salt'); //extract in input value.
-    res.send(hasedString);
+    res.send(hashedString);
 });
 
 
