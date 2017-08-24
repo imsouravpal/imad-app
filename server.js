@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool; //Step 1: creating pool for sever connection
+var crypto = require('crypto');
 
 var config = {  // Step 2: supplie your database cradentials
     user: 'spsourav263',
@@ -14,44 +15,46 @@ var config = {  // Step 2: supplie your database cradentials
 var app = express();
 app.use(morgan('combined'));
 
-var articels = {
-    'articel-one': {
-        title: "Atricle One",
-        heading: "Articel One",
-        date: "15 Aug 2017",
-        content:`
-                <p>
-                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>
-                <p>
-                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>`
-    },
-    'articel-two': {
-        title: "Atricle Two",
-        heading: "Articel Two",
-        date: "15 Aug 2017",
-        content:`
-                <p>
-                    This is my 2nd Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>
-                <p>
-                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>`
-    },
-    'articel-three': {
-        title: "Atricle Three",
-        heading: "Articel Three",
-        date: "15 Aug 2017",
-        content:`
-                <p>
-                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>
-                <p>
-                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.
-                </p>`
-    },
-};
+//var articels = {
+//    'articel-one': {
+//        title: "Atricle One",
+//        heading: "Articel One",
+//        date: "15 Aug 2017",
+//        content:`
+//                <p>
+//                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Artice//.This is my first Articel.
+      //          </p>
+    //            <p>
+    //                This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.
+        //        </p>`
+//    },
+//    'articel-two': {
+//        title: "Atricle Two",
+//        heading: "Articel Two",
+//        date: "15 Aug 2017",
+//        content:`
+//                <p>
+//                    This is my 2nd Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel//.This is my first Articel.
+//                </p>
+//                <p>
+//                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel//.This is my first Articel.
+//                </p>`
+//    },
+//    'articel-three': {
+//        title: "Atricle Three",
+//        heading: "Articel Three",
+//        date: "15 Aug 2017",
+//        content:`
+//                <p>
+                    //This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This //is my first Articel.This is my first Articel.
+//                </p>
+//                <p>
+//                    This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first //Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel.This is my first Articel//.This is my first Articel.
+//                </p>`
+//    },
+//};
+
+
 
 function creatTemplate(data){
     var title = data.title;
@@ -93,6 +96,22 @@ function creatTemplate(data){
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
+
+
+//Password hashing end-point
+
+//Declearing Hash Function: that is used below in endpoint connction function
+function hash(input, salt){
+    //How do we creat a Hash?
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return hashed.toString('hex');
+}
+
+//Endpiont connection function.
+app.get('/hash/:input', function(req, res){ //Takes an input from the user as a part of URL amd returns a hash string.
+    var hashedString = hash(req.params.input, 'instead-of-salt-for-now-we-create-a-random-string-as-salt'); //extract in input value.
+    res.send(hasedString);
 });
 
 
