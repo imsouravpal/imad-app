@@ -170,7 +170,7 @@ app.get('/counter', function (req, res) {
 
 //------------------------------------------------------------------------
 
-//Another way of sending data. We add an URLEnd point which takes a name and returns a list of names.
+//Another way of sending data. We add an URL Endpoint which takes a name and returns a list of names.
 //Query Parameter
 app.get('/submit-name', function(req, res){  //URL: /submit-name?name=xxxxxx This how a Query-Parameter Looklike.
     //How to extract "name=xxxxxx" this Query-parameter string part from req object.
