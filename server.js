@@ -130,7 +130,7 @@ app.post('/create-user', function(req, res){
    
    //Creating password:
    var salt = crypto.randomBytes(128).toString('hex');   //Generating salt for user
-   var doString = hash(password, salt);
+   var dbString = hash(password, salt);
    
    //Saving salt into database.
    pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function(err, result){
