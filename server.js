@@ -113,7 +113,26 @@ app.get('/hash/:input', function(req, res){ //Takes an input from the user as a 
     var hashedString = hash(req.params.input, 'instead-of-salt-for-now-we-create-a-random-string-as-salt'); //extract in input value.
     res.send(hashedString);
 });
+//Password hashing endpoint logic End
 
+
+//Function to Creat a new User: Strat
+
+app.get('/create-user', function(req, res){
+   //As input take the Username & Password: and it will ccreat an entry in user table.
+   //Creating password:
+   var salt = crypto.getRandomBytes(128).toString('hex');   //Generating salt for user
+   var doString = hash(password, salt);
+   
+   //Saving salt into database.
+   pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username,dbString], function(err, result){
+             if(err){
+          res.status(500).send(err.toString());
+      } else{
+          res.send('User successfully created: ' + username); 
+      }
+   });    
+});
 
 
 //Connect to detabase Test.
