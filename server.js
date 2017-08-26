@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool; //Step 1: creating pool for sever connection
 var crypto = require('crypto');
+var bodyParser = require('body-parser'); // to extrext keyword parameters from reqbody. 
 
 var config = {  // Step 2: supplie your database cradentials
     user: 'spsourav263',
@@ -14,6 +15,7 @@ var config = {  // Step 2: supplie your database cradentials
 };
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json());  //for loding json content load the json content in req.body variable.
 
 //var articels = {
 //    'articel-one': {
@@ -122,6 +124,7 @@ app.post('/create-user', function(req, res){
    //As input take the Username & Password: and it will ccreat an entry in user table.
    
    //Extract username and password form the req body
+   //JSON
    var username = req.body.username;
    var password = req.body.password;
    
