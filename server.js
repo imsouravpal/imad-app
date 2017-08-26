@@ -118,8 +118,13 @@ app.get('/hash/:input', function(req, res){ //Takes an input from the user as a 
 
 //Function to Creat a new User: Strat
 
-app.get('/create-user', function(req, res){
+app.post('/create-user', function(req, res){
    //As input take the Username & Password: and it will ccreat an entry in user table.
+   
+   //Extract username and password form the req body
+   var username = req.body.username;
+   var password = req.body.password;
+   
    //Creating password:
    var salt = crypto.getRandomBytes(128).toString('hex');   //Generating salt for user
    var doString = hash(password, salt);
