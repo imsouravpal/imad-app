@@ -199,6 +199,13 @@ app.get('/check-login', function(req, res){
    } else {
        res.send('You are not Logged In');
    }
+}); //Testing part end.
+
+
+//Create a Log out function:
+app.get('/logout', function(req, res){ //It's a get req because no data need to be send.
+   delete req.session.auth; //delete the auth object, from the session object.
+   res.send('Logged out');
 });
 
 
