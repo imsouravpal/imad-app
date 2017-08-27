@@ -195,9 +195,9 @@ app.post('/login', function(req, res){  //Takes same arguments "username","passw
 //For testing the sessionObject is actually created or not.
 app.get('/check-login', function(req, res){
    if(req.session && req.session.auth && req.session.auth.userId) {
-       res.send('You are Logged In' + req.session.auth.userId.toString());
+       res.send('You are Logged In ' + req.session.auth.userId.toString());
    } else {
-       res.send('You are not Logged In');
+       res.send('You are not Logged In ');
    }
 }); //Testing part end.
 
