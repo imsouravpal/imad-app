@@ -150,7 +150,7 @@ app.post('/login', function(req, res){  //Takes same arguments "username","passw
    var password = req.body.password;
    
    //Saving salt into database.
-   pool.query('SELECT * FROM "user" username = $1', [username], function(err, result){
+   pool.query('SELECT * FROM "user" WHERE username = $1', [username], function(err, result){
              if(err){
           res.status(500).send(err.toString());
       } else{
