@@ -101,7 +101,7 @@ app.get('/', function (req, res) {
 });
 
 
-//Password hashing end-point
+//Password hashing endpoint:
 
 //Declearing Hash Function: that is used below in endpoint connction function
 function hash(input, salt){
@@ -130,7 +130,7 @@ app.post('/create-user', function(req, res){
    
    //Creating password:
    var salt = crypto.randomBytes(128).toString('hex');   //Generating salt for user
-   var dbString = hash(password, salt);
+   var dbString = hash(password, salt); //Hashed value of Password 
    
    //Saving salt into database.
    pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function(err, result){
@@ -141,7 +141,36 @@ app.post('/create-user', function(req, res){
       }
    });    
 });
+//Function to Creat a new User: End.
 
+
+//Log In of user:
+app.post('/login', function(req, res){  //Takes same arguments "username","password".And fetching those valuse from database for matching.
+    var username = req.body.username;
+   var password = req.body.password;
+   
+   //Saving salt into database.
+   pool.query('SELECT * FROM "user" username = $1', [username], function(err, result){
+             if(err){
+          res.status(500).send(err.toString());
+      } else{
+          if(result.rows.length === 0) {
+              res.send(403).send('usename/password invalid');
+          } else {
+              //Match the password.
+              var dbString = result.rows[0].password;
+              var salt = dbString.split('$')[2];
+              var hashedPassword = hash(password, salt); //Creating a hash based on the password submited and original salt.
+              if(hashedPassword === dbString){
+              res.send('Credential is correct');
+              } else {
+                  res.send(403).send('usename/password invalid');
+                }
+            }
+        }
+    });
+});
+//Log In function end.
 
 //Connect to detabase Test.
 var pool = new Pool(config);
