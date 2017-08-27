@@ -66,7 +66,7 @@ console.log('Loaded!');
       //counter = counter+1;
       //var span = document.getElementById('count');
       //span.innerHTML = counter.toString();
-};        //Counter code Implementation completed.
+//};        //Counter code Implementation completed.
 
 
 
