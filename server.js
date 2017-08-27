@@ -4,6 +4,7 @@ var path = require('path');
 var Pool = require('pg').Pool; //Step 1: creating pool for sever connection
 var crypto = require('crypto');
 var bodyParser = require('body-parser'); // to extrext keyword parameters from reqbody. 
+var session = require('express-session');//Include Session library. And then tell "express" to use session library.
 
 var config = {  // Step 2: supplie your database cradentials
     user: 'spsourav263',
@@ -16,6 +17,13 @@ var config = {  // Step 2: supplie your database cradentials
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());  //for loding json content load the json content in req.body variable.
+app.use(session({
+    //For use the session library: 2 configarations need to gave, session library.
+    secret: 'This-is-the-value-that-used-to-encrypt-the-cookies',
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30} //tell the age of cookie to session library. cookies have a perticuler age.
+                                                //and this value is specified in milisec. {sec*min*hr*day*mnt}(means:Onemonth)
+}));
+
 
 //var articels = {
 //    'articel-one': {
@@ -162,18 +170,36 @@ app.post('/login', function(req, res){  //Takes same arguments "username","passw
               var salt = dbString.split('$')[2];
               var hashedPassword = hash(password, salt); //Creating a hash based on the password submited and original salt.
               if(hashedPassword === dbString){
-                res.send('Credential is correct');
                 
                 //Set a session: Once the user loged user stays login.
+                req.session.auth = {userId: result.rows[0].id};
+                //In background:
+                //Session middle ware setting a cookie with a session-id(which is randomly generating),
+                //Internally: On SERVER SIDE: It maps the session-id to an object,
+                //This object contais a value called auth,
+                //auth contain internaly contains another object which is userId,
+                //{auth: {"userId"}}
+                
+                res.send('Credential is correct');
                 
               } else {
                   res.send(403).send('usename/password invalid');
                 }
-            }
+           }
         }
     });
 });
 //Log In function end.
+
+//For testing the sessionObject is actually created or not.
+app.get('/check-login', function(req, res){
+   if(req.session && req.session.auth && req.session.auth.userId) {
+       res.send('You are Logged In' + req.session.auth.userId.toString());
+   } else {
+       res.send('You are not Logged In');
+   }
+});
+
 
 //Connect to detabase Test.
 var pool = new Pool(config);
